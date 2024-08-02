@@ -25,11 +25,16 @@ export const BookStoreThemeProvider = ({
   const [themeName, setThemeName] = useState<ThemeName>(DEFAULT_THEMENAME);
   const toggleTheme = () => {
     setThemeName(themeName === "light" ? "dark" : "light");
-    localStorage.setItem(THEME_LOCALSTORAGE_KEY, themeName ==="light" ? "dark" : "light")
+    localStorage.setItem(
+      THEME_LOCALSTORAGE_KEY,
+      themeName === "light" ? "dark" : "light"
+    );
   };
-  
+
   useEffect(() => {
-    const savedThemeName = localStorage.getItem(THEME_LOCALSTORAGE_KEY) as ThemeName;
+    const savedThemeName = localStorage.getItem(
+      THEME_LOCALSTORAGE_KEY
+    ) as ThemeName;
 
     setThemeName(savedThemeName || DEFAULT_THEMENAME);
   }, []);
@@ -39,8 +44,8 @@ export const BookStoreThemeProvider = ({
       <ThemeProvider theme={getTheme(themeName)}>
         {/* <Layout children={<Home />}></Layout> //1. children을 프롭스로 쓰는 방법 */}
         <GlobalStyle themeName={themeName} />
-      {children}
+        {children}
       </ThemeProvider>
     </ThemeContext.Provider>
-  )
+  );
 };
