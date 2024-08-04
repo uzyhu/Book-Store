@@ -29,6 +29,7 @@
     "eject": "react-scripts eject",
     "typecheck": "tsc --noEmit --skiplibCheck"
   },
+  "proxy": "http://localhost:9999",
   "eslintConfig": {
     "extends": [
       "react-app",
