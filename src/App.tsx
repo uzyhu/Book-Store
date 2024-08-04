@@ -8,6 +8,7 @@ import { useContext, useState } from "react";
 import { BookStoreThemeProvider, ThemeContext } from "./context/themeContext";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Error from "./components/common/Error";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/books",
     element: <Layout><div>도서 목록</div></Layout>
+  },
+  {
+    path: "/signup",
+    element: <Layout><Signup/></Layout>
   }
 ]);
 

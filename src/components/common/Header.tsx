@@ -3,18 +3,10 @@ import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Category } from "../../models/category.model";
-import { fetchCategory } from "../../api/category.api";
+import { useCategory } from "../../hooks/useCategory";
 
 const Header = () => {
-  const [category, setCategory] = useState<Category[]>([]);
-
-  useEffect(() => {
-    fetchCategory().then((category) => {
-      setCategory(category);
-    });
-  }, []);
-
+  const { category } = useCategory();
   return (
     <HeaderStyle>
       <h1 className="logo">
@@ -28,7 +20,9 @@ const Header = () => {
             <li key={item.category_id}>
               <Link
                 to={
-                  item.category_id === null ? `/books` : `/books?category_id=${item.category_id}`
+                  item.category_id === null
+                    ? `/books`
+                    : `/books?category_id=${item.category_id}`
                 }
               >
                 {item.category_name}
@@ -46,7 +40,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/join">
+            <Link to="/signup">
               <FaRegUser />
               회원가입
             </Link>
