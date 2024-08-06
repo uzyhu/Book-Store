@@ -15,6 +15,7 @@ export const state = {
   themeName: DEFAULT_THEMENAME as ThemeName,
   toggleTheme: () => {},
 };
+
 export const ThemeContext = createContext<State>(state);
 
 export const BookStoreThemeProvider = ({
