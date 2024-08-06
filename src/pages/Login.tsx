@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { login, signup } from "../api/auth.api";
 import { useAlert } from "../hooks/useAlert";
 import { SignupStyle } from "./Signup";
+import { useAuthStore } from "../store/authStore";
 
 export interface SignupProps {
   email: string;
@@ -17,6 +18,8 @@ export interface SignupProps {
 const Login = () => {
   const navigate = useNavigate();
   const showAlert = useAlert();
+
+  const {isLoggedIn, storeLogin, storeLogout} = useAuthStore();
   //   const [email, setEmail] = useState("");
   //   const [password, setPassword] = useState("");
 
@@ -33,9 +36,12 @@ const Login = () => {
   const onSubmit = (data: SignupProps) => {
     //submit했을 때 액션
     login(data).then((res) => {
-        console.log(res.token);
+        //상태 변화
+        storeLogin(res.token);
         showAlert("로그인 완료되었습니다.");
         navigate("/");
+    }, (error) => {
+        showAlert("로그인에 실패했습니다."); //그다음 http.ts interceptors처럼 로그인창으로 다시 돌아가게됨
     })
   };
 
