@@ -21,7 +21,7 @@ const Books = () => {
         </div>
         {!isEmpty && <BooksList books={books} />}
         {isEmpty && <BooksEmpty />}
-        {!isEmpty && <Pagination />}
+        {!isEmpty && <Pagination pagination={pagination}/>}
       </BooksStyle>
     </>
   );
@@ -32,6 +32,13 @@ const BooksStyle = styled.div`
   flex-direction: column;
   justify-content: space-between;
   gap: 24px;
+
+  .filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+  }
 `;
 
 export default Books;
