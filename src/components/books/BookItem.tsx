@@ -5,6 +5,7 @@ import { getImgSrc } from "../../utills/image";
 import { formatNumber } from "../../utills/format";
 import { FaHeart } from "react-icons/fa";
 import { ViewMode } from "./BooksViewSwitcher";
+import { Link } from "react-router-dom";
 
 interface Props {
   book: Book;
@@ -14,32 +15,37 @@ interface Props {
 const BookItem = ({ book, view }: Props) => {
   return (
     <BookItemStyle view={view}>
-      <div className="img">
-        <img src={getImgSrc(book.img)} alt={book.title} />
-      </div>
-      <div className="content">
-        <h2 className="title">{book.title}</h2>
-        <p className="summary">{book.summary}</p>
-        <p className="author">{book.author}</p>
-        <p className="price">{formatNumber(book.price)}원</p>
-        <div className="likes">
-          <FaHeart />
-          <span>{book.likes}</span>
+      <Link to={`/book/${book.id}`}>
+        <div className="img">
+          <img src={getImgSrc(book.img)} alt={book.title} />
         </div>
-      </div>
+        <div className="content">
+          <h2 className="title">{book.title}</h2>
+          <p className="summary">{book.summary}</p>
+          <p className="author">{book.author}</p>
+          <p className="price">{formatNumber(book.price)}원</p>
+          <div className="likes">
+            <FaHeart />
+            <span>{book.likes}</span>
+          </div>
+        </div>
+      </Link>
     </BookItemStyle>
   );
 };
 
 const BookItemStyle = styled.div<Pick<Props, "view">>`
-  display: flex;
-  flex-direction: ${({view}) => (view === "grid" ? "column" : "row")};
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  a {
+    display: flex;
+    flex-direction: ${({ view }) => (view === "grid" ? "column" : "row")};
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
 
   .img {
     border-radius: ${({ theme }) => theme.borderRadius.default};
     overflow: hidden;
-    width: ${({view}) => (view === "grid" ? "auto" :"160px")};
+    width: ${({ view }) => (view === "grid" ? "auto" : "160px")};
     img {
       max-width: 100%;
     }
@@ -48,7 +54,7 @@ const BookItemStyle = styled.div<Pick<Props, "view">>`
   .content {
     padding: 16px;
     position: relative;
-    flex: ${({view}) => (view === "grid" ? 0 : 1)};
+    flex: ${({ view }) => (view === "grid" ? 0 : 1)};
     .title {
       font-size: 1.25rem;
       font-weight: 700;
